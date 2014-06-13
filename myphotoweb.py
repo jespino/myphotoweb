@@ -4,13 +4,19 @@ import pyjade
 from pyjade.ext.html import HTMLCompiler
 import lesscpy
 import os
-from jinja2 import Template as JinjaTemplate
 
 class Compiler(HTMLCompiler):
     def visitInclude(self, node):
-        content = open(node.path, 'r').read()
-        result = pyjade.process(content, compiler=Compiler)
-        return self.buf.append(result)
+        if os.path.exists(node.path):
+            src = open(node.path, 'r').read()
+        elif os.path.exists("%s.jade" % node.path):
+            src = open("%s.jade" % node.path, 'r').read()
+        else:
+            raise Exception("Include path doesn't exists")
+
+        parser = pyjade.parser.Parser(src)
+        block = parser.parse()
+        self.visit(block)
 
 # create the top-level parser
 parser = argparse.ArgumentParser(prog='myphotoweb')
