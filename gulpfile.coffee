@@ -17,7 +17,7 @@ gulp.task "coffee", ->
 
 gulp.task "jade", ->
     gulp.src("pages/*.jade")
-        .pipe(jade())
+        .pipe(jade({locals: config}))
         .pipe(gulp.dest('dist/'))
 
 gulp.task 'clean', ->
