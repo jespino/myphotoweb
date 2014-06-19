@@ -1,6 +1,7 @@
 module.exports = {
     title: "My title"
     template: "default"
+    thumbnailSize: [100, 75]
     photos: [
         {
             path: "imgs/photo3.png"

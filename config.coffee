@@ -1,12 +1,15 @@
 _ = require('lodash')
-path = require('path')
+fs = require('fs')
 
 module.exports = {
     title: "Title"
     template: "default"
+    thumbnailSize: [100, 75]
+    getCategories: ->
+        return _.uniq (photo.category for photo in @.photos)
 }
 
-if path.existsSync('./config.local.coffee')
+if fs.existsSync('./config.local.coffee')
     configlocal = require('./config.local.coffee')
     module.exports = _.extend(module.exports, configlocal)
 else

@@ -1,0 +1,11 @@
+extends ../templates/default/layout.jade
+
+block content
+  h1= category
+  ul
+    each photo in photos
+      if photo.category == category
+        li
+          p= photo.title
+          img(src="imgs/" + thumbnail(photo.path))
+
