@@ -4,3 +4,9 @@ block content
     div.photo
         div.bar
             div.title= title
+        ul
+            each photo in photos
+                li
+                    p= photo.title
+                    img(src=photo.path)
+

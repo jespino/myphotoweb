@@ -1,0 +1,19 @@
+module.exports = {
+    title: "My title"
+    template: "default"
+    photos: [
+        {
+            path: "imgs/photo3.png"
+            title: "My third photo"
+            category: "Beach"
+            tags: ["photo", "third"]
+        }
+    ]
+    publishTo:
+        service: "s3"
+        credentials:
+            key: "XXXXXXXXXXXXXXXXXXXX"
+            secret: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+            bucket: "example-bucket"
+            region: "eu-west-1"
+}
