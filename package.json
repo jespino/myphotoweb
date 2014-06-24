@@ -28,5 +28,8 @@
     "gulp-rename": "^1.2.0",
     "gulp-s3": "^0.3.0",
     "lodash": "^2.4.1"
+  },
+  "devDependencies": {
+    "merge-stream": "^0.1.1"
   }
 }

@@ -8,6 +8,7 @@ concat = require('gulp-concat')
 imageResize = require('gulp-image-resize')
 rename = require('gulp-rename')
 path = require('path')
+merge = require('merge-stream')
 
 _ = require('lodash')
 
@@ -33,16 +34,27 @@ gulp.task "coffee", ->
         .pipe(gulp.dest('dist/js'))
 
 gulp.task "jade", ->
-    _.each config.getCategories(), (category) ->
-        gulp.src("pages/category.jade")
-            .pipe(jade({locals: _.extend(config, {
-                category: category
-                thumbnail: (filePath) -> "#{path.basename(filePath, ".png")}-thumbnail#{path.extname(filePath)}"
-            })}))
-            .pipe(concat("category-#{category}.html"))
-            .pipe(gulp.dest("dist/"))
+#    _.each config.getCategories(), (category) ->
+    category = "Beach"
+    category2 = "Test"
+    locals = _.extend(config, {
+        category: _.clone category
+        thumbnail: (filePath) ->
+            "#{path.basename(filePath, ".png")}-thumbnail#{path.extname(filePath)}"
+    })
+    locals2 = _.extend(config, {
+        category: _.clone category2
+        thumbnail: (filePath) ->
+            "#{path.basename(filePath, ".png")}-thumbnail#{path.extname(filePath)}"
+    })
+    gulp.src("pages/category.jade").pipe(jade({locals: locals }))
+    .pipe(concat("category-#{category}.html"))
+    .pipe(gulp.dest("dist/"))
+    .pipe(jade({locals: locals2 }))
+    .pipe(concat("category-#{category}.html"))
+    .pipe(gulp.dest("dist/"))
 
-    gulp.src("pages/index.jade")
+    index = gulp.src("pages/index.jade")
         .pipe(jade({locals: config}))
         .pipe(gulp.dest('dist/'))
 
