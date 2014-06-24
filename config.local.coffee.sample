@@ -13,7 +13,7 @@ module.exports = {
     publishTo:
         service: "s3"
         credentials:
-            key: "XXXXXXXXXXXXXXXXXXXX"
+            key: "XXXXXXXXXXXXXXXXXXXXX"
             secret: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
             bucket: "example-bucket"
             region: "eu-west-1"
