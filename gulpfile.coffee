@@ -34,18 +34,23 @@ gulp.task "coffee", ->
         .pipe(gulp.dest('dist/js'))
 
 gulp.task "jade", ->
+    tasks = []
     _.each config.getCategories(), (category) ->
-        gulp.src("pages/category.jade")
-            .pipe(jade({locals: _.extend({}, config, {
-                category: category
-                thumbnail: (filePath) -> "#{path.basename(filePath, ".png")}-thumbnail#{path.extname(filePath)}"
-            })}))
-            .pipe(concat("category-#{category}.html"))
-            .pipe(gulp.dest("dist/"))
+        task = gulp.src("pages/category.jade")
+                   .pipe(jade({locals: _.extend({}, config, {
+                       category: category
+                       thumbnail: (filePath) -> "#{path.basename(filePath, ".png")}-thumbnail#{path.extname(filePath)}"
+                   })}))
+                   .pipe(concat("category-#{category}.html"))
+                   .pipe(gulp.dest("dist/"))
+        tasks.push task
 
-    gulp.src("pages/index.jade")
-        .pipe(jade({locals: config}))
-        .pipe(gulp.dest('dist/'))
+    task = gulp.src("pages/index.jade")
+               .pipe(jade({locals: config}))
+               .pipe(gulp.dest('dist/'))
+    tasks.push task
+
+    return merge.apply(merge, tasks)
 
 gulp.task 'clean', ->
     gulp.src(['dist/'], {read: false})
