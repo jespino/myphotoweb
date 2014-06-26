@@ -2,7 +2,7 @@ gulp = require('gulp')
 coffee = require('gulp-coffee')
 less = require('gulp-less')
 jade = require('gulp-jade')
-clean = require('gulp-clean')
+rimraf = require('gulp-rimraf')
 config = require('./config.coffee')
 concat = require('gulp-concat')
 imageResize = require('gulp-image-resize')
@@ -54,7 +54,7 @@ gulp.task "jade", ->
 
 gulp.task 'clean', ->
     gulp.src(['dist/'], {read: false})
-        .pipe(clean())
+        .pipe(rimraf())
 
 gulp.task 'default', ['clean'], ->
     gulp.start 'less', 'coffee', 'jade'
