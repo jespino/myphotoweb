@@ -4,9 +4,12 @@ block content
     div.photo
         div.bar
             div.title= title
+            div.menu
+                span.left &lt;
+                span.right &gt;
         ul
             each photo in photos
                 li
                     p= photo.title
-                    img(src=photo.path)
+                    img.photo(src=photo.path)
 

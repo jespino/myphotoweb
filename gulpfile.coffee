@@ -19,6 +19,7 @@ gulp.task "less", ->
 
 gulp.task "images", ->
     gulp.src((photo.path for photo in config.photos))
+        .pipe(gulp.dest('dist/imgs'))
         .pipe(imageResize({
             width : config.thumbnailSize[0],
             height : config.thumbnailSize[1],
@@ -57,4 +58,4 @@ gulp.task 'clean', ->
         .pipe(rimraf())
 
 gulp.task 'default', ['clean'], ->
-    gulp.start 'less', 'coffee', 'jade'
+    gulp.start 'less', 'coffee', 'jade', 'images'
